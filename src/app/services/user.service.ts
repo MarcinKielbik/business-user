@@ -10,7 +10,7 @@ export class UserService {
 
   constructor() { }
 
-  submitAge(userPayload: UserPayload): Observable<any> {
+  submitUser(userPayload: UserPayload): Observable<any> {
       return of({ status: 'ok', received: userPayload });
     }
 }
