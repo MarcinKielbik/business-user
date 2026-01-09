@@ -1,0 +1,17 @@
+<div class="toast-wrapper">
+  <div class="toast" *ngFor="let t of toast">
+    <clr-alert
+      [clrAlertClosable]="true"
+      [clrAlertType]="
+        t.type === 'success' ? 'success' :
+        t.type === 'error' ? 'danger' :
+        t.type === 'warning' ? 'warning' : 'info'
+      "
+      (clrAlertClosedChange)="dismiss(t.id)"
+    >
+      <clr-alert-item>
+        <span class="alert-text">{{ t.message }}</span>
+      </clr-alert-item>
+    </clr-alert>
+  </div>
+</div>

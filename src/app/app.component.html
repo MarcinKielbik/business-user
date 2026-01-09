@@ -1,0 +1,39 @@
+<form [formGroup]="ageForm" (ngSubmit)="submitAge()" clrForm>
+  <clr-number-input-container>
+    <label>Age</label>
+    <input clrNumberInput type="number" formControlName="age" />
+
+    <clr-control-error *ngIf="ageForm.get('age')?.touched && ageForm.get('age')?.invalid">
+      Enter a valid age
+    </clr-control-error>
+  </clr-number-input-container>
+
+  <clr-checkbox-container>
+    <label>Regulamin</label>
+    <clr-checkbox-wrapper>
+      <input clrCheckbox type="checkbox" formControlName="termsAccepted" />
+      <label>Zapoznałem się z regulaminem</label>
+    </clr-checkbox-wrapper>
+
+    <clr-control-error *ngIf="ageForm.get('termsAccepted')?.touched && ageForm.get('termsAccepted')?.hasError('required')">
+      Musisz zaakceptować regulamin.
+    </clr-control-error>
+    <clr-control-error *ngIf="ageForm.get('termsAccepted')?.touched && ageForm.get('termsAccepted')?.hasError('requiredTrue')">
+      Musisz zaakceptować regulamin.
+    </clr-control-error>
+  </clr-checkbox-container>
+
+  <button type="submit" clrButton class="btn btn-primary">Check</button>
+</form>
+
+<div class="mt-3" *ngIf="message">
+  <clr-alert [clrAlertType]="message.includes('pełnoletni') ? 'success' : 'warning'" [clrAlertClosable]="true">
+    <clr-alert-item>
+      <span class="alert-text">{{ message }}</span>
+    </clr-alert-item>
+  </clr-alert>
+</div>
+
+
+
+<app-toast-container></app-toast-container>
