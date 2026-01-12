@@ -78,26 +78,8 @@ export class AppComponent {
     this.userService.submitUser(user).subscribe({
       next: () => {
         this.toast.success('Dane zapisane poprawnie');
-
-        // save to localStorage
-        const STORAGE_KEY = 'userData'
-
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-
-        const storedUserJson = localStorage.getItem(STORAGE_KEY);
-        if(storedUserJson) {
-          try {
-            const storedUser: UserPayload = JSON.parse(storedUserJson);
-            console.log('Odczytanie danych z Local Storage: ', storedUser);
-          } catch(e) {
-              console.error('Błąd parsowania JSON z Local Storage:', e)
-          }
-        } else {
-          console.warn('Brak danych w local storage pod kluczem', STORAGE_KEY)
-        }
-      },
-      error: () => {
-        this.toast.error('Błąd zapisu');
+        this.userService.saveUserData(user);
+        this.userService.readUserData();
       }
     });
 

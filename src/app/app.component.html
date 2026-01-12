@@ -4,7 +4,7 @@
   <clr-input-container>
     <label for="firstName">Imię</label>
     <input id="firstName" type="text" formControlName="firstName" clrInput />
-    <clr-control-error *ngIf="userForm.get('firstName')?.hasError('required')">
+    <clr-control-error *clrIfError="'required'">
       Imię jest wymagane.
     </clr-control-error>
   </clr-input-container>
