@@ -1,12 +1,51 @@
-<form [formGroup]="ageForm" (ngSubmit)="submitAge()" clrForm>
+<form [formGroup]="userForm" (ngSubmit)="submitUser()" clrForm>
+
+
+  <clr-input-container>
+    <label for="firstName">Imię</label>
+    <input id="firstName" type="text" formControlName="firstName" clrInput />
+    <clr-control-error *clrIfError="'required'">
+      Imię jest wymagane.
+    </clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="lastName">Nazwisko</label>
+    <input id="lastName" type="text" formControlName="lastName" clrInput />
+    <clr-control-error *ngIf="userForm.get('lastName')?.hasError('required')">
+      Nazwisko jest wymagane.
+    </clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" formControlName="email" clrInput />
+    <clr-control-error *ngIf="userForm.get('email')?.hasError('required')">
+      E-mail jest wymagany.
+    </clr-control-error>
+    <clr-control-error *ngIf="userForm.get('email')?.hasError('email')">
+      Wpisz poprawny adres e-mail.
+    </clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="organization">Organizacja</label>
+    <input id="organization" type="text" formControlName="organization" clrInput />
+    <clr-control-error *ngIf="userForm.get('organization')?.hasError('required')">
+
+    </clr-control-error>
+  </clr-input-container>
+
+
   <clr-number-input-container>
     <label>Age</label>
     <input clrNumberInput type="number" formControlName="age" />
 
-    <clr-control-error *ngIf="ageForm.get('age')?.touched && ageForm.get('age')?.invalid">
+    <clr-control-error *ngIf="userForm.get('age')?.touched && userForm.get('age')?.invalid">
       Enter a valid age
     </clr-control-error>
   </clr-number-input-container>
+
 
   <clr-checkbox-container>
     <label>Regulamin</label>
@@ -15,10 +54,12 @@
       <label>Zapoznałem się z regulaminem</label>
     </clr-checkbox-wrapper>
 
-    <clr-control-error *ngIf="ageForm.get('termsAccepted')?.touched && ageForm.get('termsAccepted')?.hasError('required')">
+    <clr-control-error
+      *ngIf="userForm.get('termsAccepted')?.touched && userForm.get('termsAccepted')?.hasError('required')">
       Musisz zaakceptować regulamin.
     </clr-control-error>
-    <clr-control-error *ngIf="ageForm.get('termsAccepted')?.touched && ageForm.get('termsAccepted')?.hasError('requiredTrue')">
+    <clr-control-error
+      *ngIf="userForm.get('termsAccepted')?.touched && userForm.get('termsAccepted')?.hasError('requiredTrue')">
       Musisz zaakceptować regulamin.
     </clr-control-error>
   </clr-checkbox-container>
