@@ -22,7 +22,7 @@ export class AppComponent {
   minAge = 1;
   maxAge = 100;
 
-   users: UserPayload[] = [];
+  users: UserPayload[] = [];
   private STORAGE_KEY = 'userData';
 
 
@@ -98,17 +98,12 @@ export class AppComponent {
         }
 
         const user: UserPayload = this.userForm.value;
+        
+        this.users.push(user);
 
-    // Dodajemy nowego użytkownika do this.users
-    this.users.push(user);
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
 
-    // Zapisujemy całą tablicę do localStorage
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
-
-    this.userForm.reset();
-
-
-       
+        this.userForm.reset();
 
 
         // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
