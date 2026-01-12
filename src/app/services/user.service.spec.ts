@@ -16,7 +16,7 @@ describe('UserService', () => {
   });
 
 
-   it('should be status ok and transmitted payload', (done) => {
+  it('should be status ok and transmitted payload', (done) => {
     const payload: UserPayload = {
       firstName: 'Jan',
       lastName: 'Kowalski',
@@ -27,9 +27,9 @@ describe('UserService', () => {
     }
 
     service.submitUser(payload).subscribe(res => {
-      expect(res).toEqual({status: 'ok', received: payload});
+      expect(res).toEqual({ status: 'ok', received: payload });
       done();
     })
 
-   });
+  });
 });

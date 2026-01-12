@@ -22,6 +22,9 @@ export class AppComponent {
   minAge = 1;
   maxAge = 100;
 
+   users: UserPayload[] = [];
+  private STORAGE_KEY = 'userData';
+
 
 
   constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService) { }
@@ -39,6 +42,17 @@ export class AppComponent {
 
 
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
+
+
+    const data = localStorage.getItem(this.STORAGE_KEY);
+    if (data) {
+      try {
+        const parsed = JSON.parse(data);
+        this.users = Array.isArray(parsed) ? parsed : [parsed];
+      } catch {
+        this.users = [];
+      }
+    }
   }
 
 
@@ -79,11 +93,26 @@ export class AppComponent {
       next: () => {
         this.toast.success('Dane zapisane poprawnie');
 
-        // save to localStorage
-        const STORAGE_KEY = 'userData'
+        if (this.userForm.invalid) {
+          return;
+        }
 
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+        const user: UserPayload = this.userForm.value;
 
+    // Dodajemy nowego użytkownika do this.users
+    this.users.push(user);
+
+    // Zapisujemy całą tablicę do localStorage
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
+
+    this.userForm.reset();
+
+
+       
+
+
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+        /*
         const storedUserJson = localStorage.getItem(STORAGE_KEY);
         if(storedUserJson) {
           try {
@@ -94,11 +123,14 @@ export class AppComponent {
           }
         } else {
           console.warn('Brak danych w local storage pod kluczem', STORAGE_KEY)
-        }
+        }*/
+
       },
       error: () => {
         this.toast.error('Błąd zapisu');
       }
+
+
     });
 
 
@@ -125,8 +157,6 @@ export class AppComponent {
           }
         })
     */
-
-
 
 
 

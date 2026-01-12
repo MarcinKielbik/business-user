@@ -7,8 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastContainerComponent } from './shared/toast/toast-container/toast-container.component';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,8 @@ import { ToastContainerComponent } from './shared/toast/toast-container/toast-co
     AppRoutingModule,
     CommonModule,
     ClarityModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    BrowserAnimationsModule
 
   ],
   providers: [],
