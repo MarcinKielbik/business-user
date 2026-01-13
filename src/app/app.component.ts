@@ -6,7 +6,6 @@ import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
 
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -79,13 +78,18 @@ export class AppComponent {
     }
 
 
+    const { firstName, lastName, email, organization, age, termsAccepted } =
+      this.userForm.value as UserPayload;
+
+
+
     const user: UserPayload = {
-      firstName: this.userForm.get('firstName')?.value,
-      lastName: this.userForm.get('lastName')?.value,
-      email: this.userForm.get('email')?.value,
-      organization: this.userForm.get('organization')?.value,
-      age: this.userForm.get('age')?.value,
-      termsAccepted: this.userForm.get('termsAccepted')?.value === true
+      firstName,
+      lastName,
+      email,
+      organization,
+      age,
+      termsAccepted: !!termsAccepted
     };
 
 
