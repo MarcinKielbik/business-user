@@ -6,6 +6,8 @@ import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
 import { NameComparator } from './name.comparator';
 import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
+import { StoreUserService } from './services/store-user.service';
+import { STORAGE_KEY } from './storage-key';
 
 
 @Component({
@@ -24,12 +26,11 @@ export class AppComponent {
   maxAge = 100;
 
   users: UserPayload[] = [];
-  private STORAGE_KEY = 'userData';
 
   nameComparator = new NameComparator();
   defaultSortOrder = ClrDatagridSortOrder.ASC;
 
-  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private storeUserService: StoreUserService) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -43,17 +44,8 @@ export class AppComponent {
 
 
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
-
-
-    const data = localStorage.getItem(this.STORAGE_KEY);
-    if (data) {
-      try {
-        const parsed = JSON.parse(data);
-        this.users = Array.isArray(parsed) ? parsed : [parsed];
-      } catch {
-        this.users = [];
-      }
-    }
+    
+    this.storeUserService.readUserData();
   }
 
 
@@ -107,7 +99,7 @@ export class AppComponent {
 
         this.users.push(user);
 
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(this.users));
 
         this.userForm.reset();
 
