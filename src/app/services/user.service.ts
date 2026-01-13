@@ -15,8 +15,7 @@ export class UserService {
   submitUser(userPayload: UserPayload): Observable<any> {
     return of({ status: 'ok', received: userPayload });
   }
-
-
+  
   saveUserData(userPayload: UserPayload): void {
 
     try {

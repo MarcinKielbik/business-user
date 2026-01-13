@@ -8,11 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastContainerComponent } from './shared/toast/toast-container/toast-container.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToastContainerComponent,
+    UsersComponent,
   
   ],
   imports: [
