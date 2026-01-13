@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AgePayload, AgeService } from './services/age.service';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AgeService } from './services/age.service';
 import { ToastService } from './services/toast.service';
 import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
@@ -109,55 +109,12 @@ export class AppComponent {
 
         this.userForm.reset();
 
-
-        // localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-        /*
-        const storedUserJson = localStorage.getItem(STORAGE_KEY);
-        if(storedUserJson) {
-          try {
-            const storedUser: UserPayload = JSON.parse(storedUserJson);
-            console.log('Odczytanie danych z Local Storage: ', storedUser);
-          } catch(e) {
-              console.error('Błąd parsowania JSON z Local Storage:', e)
-          }
-        } else {
-          console.warn('Brak danych w local storage pod kluczem', STORAGE_KEY)
-        }*/
-
       },
       error: () => {
         this.toast.error('Błąd zapisu');
       }
 
 
-    });
-
-
-
-
-    /*
-      submitAge() {
-         
-        const age = this.userForm.value.age;
-        this.message = age >= 18 ? 'Jesteś pełnoletni' : 'Nie masz 18 lat';
-        console.log(this.message);
-    
-        const terms: boolean = this.userForm.value.termsAccepted;
-        console.log(terms);
-    
-        const agePayload: AgePayload = { age, termsAccepted: terms };
-        this.ageService.submitAge(agePayload).subscribe({
-          next: () => {
-            this.toast.success('Dane zapisane poprawnie');
-          },
-          error: (err) => {
-            this.toast.error('Błąd zapisu');
-            console.error('Błąd serwisu', err);
-          }
-        })
-    */
-
-
-
+    })
   }
 }
