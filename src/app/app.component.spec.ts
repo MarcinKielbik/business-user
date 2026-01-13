@@ -32,7 +32,7 @@ describe('AppComponent', () => {
     expect(component).toBeDefined()
   });
 
-  fdescribe('by default', () => {
+  describe('by default', () => {
     it('should min age be 1 by default', () => {
       // given
       // when
