@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
+
 describe('AppComponent', () => {
 
   let component: AppComponent;
@@ -111,6 +112,10 @@ describe('AppComponent', () => {
       expect(component.maxAge).toEqual(100);
     });
   });
+
+  
+
+
 
   /*
   describe('OnSubmit', ()=>{
