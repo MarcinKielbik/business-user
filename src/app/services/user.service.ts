@@ -8,7 +8,7 @@ import { STORAGE_KEY } from '../storage-key';
   providedIn: 'root'
 })
 export class UserService {
-
+  
   constructor() { }
 
   submitUser(userPayload: UserPayload): Observable<any> {
@@ -24,5 +24,4 @@ export class UserService {
     }
 
   }
-
 }

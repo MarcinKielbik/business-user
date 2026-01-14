@@ -9,7 +9,6 @@ export class StoreUserService {
 
   constructor() { }
 
-  
   readUserData(): UserPayload | null {
     const storedUserJson = localStorage.getItem(STORAGE_KEY);
 
