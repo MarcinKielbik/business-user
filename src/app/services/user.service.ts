@@ -3,12 +3,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { UserPayload } from '../interfaces/user-payload';
 import { of } from 'rxjs/internal/observable/of';
 import { STORAGE_KEY } from '../storage-key';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-
+  
   constructor() { }
 
   submitUser(userPayload: UserPayload): Observable<any> {

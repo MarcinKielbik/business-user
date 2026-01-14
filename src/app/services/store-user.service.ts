@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserPayload } from '../interfaces/user-payload';
 import { STORAGE_KEY } from '../storage-key';
+
 @Injectable({
   providedIn: 'root'
 })

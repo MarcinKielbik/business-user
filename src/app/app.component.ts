@@ -8,6 +8,8 @@ import { NameComparator } from './name.comparator';
 import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
 import { StoreUserService } from './services/store-user.service';
 
+import { STORAGE_KEY } from './storage-key';
+
 
 @Component({
   selector: 'app-root',
@@ -41,6 +43,8 @@ export class AppComponent {
       termsAccepted: [false, [Validators.requiredTrue]]
     });
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
+    
+    this.storeUserService.readUserData();
 
     this.storeUserService.readUserData();
 
@@ -96,6 +100,8 @@ export class AppComponent {
         const user: UserPayload = this.userForm.value;
 
         this.users.push(user);
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(this.users));
+
         this.userForm.reset();
 
       },

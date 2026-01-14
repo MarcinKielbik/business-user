@@ -75,12 +75,12 @@
 </div>
 
 <clr-datagrid>
-  <clr-dg-column [clrDgSortBy]="nameComparator" [clrDgSortOrder]="defaultSortOrder" >Nazwisko</clr-dg-column>  
-  <clr-dg-column>Imię</clr-dg-column>
+  <clr-dg-column [clrDgSortBy]="nameComparator" [clrDgSortOrder]="defaultSortOrder" clrDgField="lastName">Nazwisko</clr-dg-column>  
+  <clr-dg-column clrDgField="firstName">Imię</clr-dg-column>
 
-  <clr-dg-column>E-mail</clr-dg-column>
-  <clr-dg-column>Organizacja</clr-dg-column>
-  <clr-dg-column>Wiek</clr-dg-column>
+  <clr-dg-column clrDgField="email">E-mail</clr-dg-column>
+  <clr-dg-column clrDgField="organization">Organizacja</clr-dg-column>
+  <clr-dg-column clrDgField="age">Wiek</clr-dg-column>
 
 
   <clr-dg-row *clrDgItems="let user of users">  
