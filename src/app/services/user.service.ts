@@ -22,6 +22,5 @@ export class UserService {
     } catch (e) {
       console.error('Błąd zapisu do Local Storage:', e);
     }
-
   }
 }
