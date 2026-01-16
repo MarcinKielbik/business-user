@@ -101,7 +101,7 @@ export class AppComponent {
 
         this.users.push(user);
         // localStorage.setItem(STORAGE_KEY, JSON.stringify(this.users));
-
+        this.userService.saveUserData(user);
         this.userForm.reset();
 
       },

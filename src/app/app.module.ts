@@ -14,6 +14,9 @@ import { UserState } from './state/users/user.state';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { NgxsModule } from '@ngxs/store';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
+const optionalLoggerModule = environment.ngxsLogger ? [NgxsLoggerPluginModule.forRoot(), NgxsReduxDevtoolsPluginModule.forRoot()] : [];
 
 @NgModule({
   declarations: [
@@ -28,8 +31,7 @@ import { NgxsModule } from '@ngxs/store';
     ClarityModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-
-
+    optionalLoggerModule
   ],
   providers: [
     //provideStore([UserState]),
