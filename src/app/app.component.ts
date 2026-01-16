@@ -9,6 +9,8 @@ import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
 import { StoreUserService } from './services/store-user.service';
 
 import { STORAGE_KEY } from './storage-key';
+import { Store } from '@ngxs/store';
+import { AddUser } from './state/users/users.actions';
 
 
 @Component({
@@ -31,7 +33,7 @@ export class AppComponent {
   nameComparator = new NameComparator();
   defaultSortOrder = ClrDatagridSortOrder.ASC;
 
-  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private storeUserService: StoreUserService) { }
+  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private storeUserService: StoreUserService, private store: Store) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -44,8 +46,6 @@ export class AppComponent {
     });
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
     
-    this.storeUserService.readUserData();
-
     this.storeUserService.readUserData();
 
   }
@@ -110,6 +110,10 @@ export class AppComponent {
       }
 
 
-    })
+    });
+
+    this.store.dispatch(new AddUser(user));
+
+
   }
 }
