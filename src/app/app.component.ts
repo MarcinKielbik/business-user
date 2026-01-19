@@ -4,6 +4,9 @@ import { AgeService } from './services/age.service';
 import { ToastService } from './services/toast.service';
 import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
+import { NameComparator } from './name.comparator';
+import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
+import { StoreUserService } from './services/store-user.service';
 
 
 @Component({
@@ -22,11 +25,11 @@ export class AppComponent {
   maxAge = 100;
 
   users: UserPayload[] = [];
-  private STORAGE_KEY = 'userData';
 
+  nameComparator = new NameComparator();
+  defaultSortOrder = ClrDatagridSortOrder.ASC;
 
-
-  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private storeUserService: StoreUserService) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -34,24 +37,13 @@ export class AppComponent {
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       organization: ['', [Validators.required]],
-
       age: ['', [Validators.required, Validators.min(0)]],
       termsAccepted: [false, [Validators.requiredTrue]]
     });
-
-
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
 
+    this.storeUserService.readUserData();
 
-    const data = localStorage.getItem(this.STORAGE_KEY);
-    if (data) {
-      try {
-        const parsed = JSON.parse(data);
-        this.users = Array.isArray(parsed) ? parsed : [parsed];
-      } catch {
-        this.users = [];
-      }
-    }
   }
 
 
@@ -102,11 +94,8 @@ export class AppComponent {
         }
 
         const user: UserPayload = this.userForm.value;
-        
+
         this.users.push(user);
-
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
-
         this.userForm.reset();
 
       },
