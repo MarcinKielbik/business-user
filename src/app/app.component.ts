@@ -6,6 +6,10 @@ import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
 import { NameComparator } from './name.comparator';
 import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
+import { Select, Store } from '@ngxs/store';
+import { AddUser, LoadUsers } from './user/user.action';
+import { UserState } from './user/user.state';
+import { Observable } from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -23,14 +27,17 @@ export class AppComponent {
   minAge = 1;
   maxAge = 100;
 
-  users: UserPayload[] = [];
+  // users: UserPayload[] = [];
+
+  @Select(UserState.users) users$!: Observable<UserPayload[]>;
+
   private STORAGE_KEY = 'userData';
 
   nameComparator = new NameComparator();
   defaultSortOrder = ClrDatagridSortOrder.ASC;
 
-  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService) { }
-
+  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private store: Store) { }
+   
   ngOnInit(): void {
     this.userForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -44,7 +51,7 @@ export class AppComponent {
 
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
 
-
+    /*
     const data = localStorage.getItem(this.STORAGE_KEY);
     if (data) {
       try {
@@ -54,6 +61,12 @@ export class AppComponent {
         this.users = [];
       }
     }
+*/
+
+    //this.store.dispatch(new AddUser(this.userForm.value));
+    this.store.dispatch(new LoadUsers());
+
+
   }
 
 
@@ -105,11 +118,17 @@ export class AppComponent {
 
         const user: UserPayload = this.userForm.value;
 
-        this.users.push(user);
-
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
-
+        this.store.dispatch(new AddUser(user));
         this.userForm.reset();
+
+
+        // this.users.push(user);
+
+        // localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.users));
+
+        // this.userForm.reset();
+
+
 
       },
       error: () => {

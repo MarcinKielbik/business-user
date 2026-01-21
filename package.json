@@ -21,14 +21,13 @@
     "@cds/core": "^6.16.1",
     "@clr/angular": "^17.12.1",
     "@clr/ui": "^17.12.1",
-"@ngxs/logger-plugin": "3.8.2",
-"@ngxs/router-plugin": "3.8.2",
-"@ngxs/storage-plugin": "3.8.2",
-"@ngxs/store": "3.8.2",
+    "@ngxs/logger-plugin": "3.8.2",
+    "@ngxs/router-plugin": "3.8.2",
+    "@ngxs/storage-plugin": "3.8.2",
+    "@ngxs/store": "3.8.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
-    
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.17",
@@ -43,6 +42,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.2",
     "@ngxs/devtools-plugin": "^3.8.2"
-
   }
 }
