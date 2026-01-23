@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { UserPayload } from '../interfaces/user-payload';
 import { of } from 'rxjs/internal/observable/of';
+import { STORAGE_KEY } from '../storage-key';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  STORAGE_KEY = 'userData'
-
+  
   constructor() { }
 
   submitUser(userPayload: UserPayload): Observable<any> {
@@ -19,12 +18,12 @@ export class UserService {
   saveUserData(userPayload: UserPayload): void {
 
     try {
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(userPayload));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(userPayload));
     } catch (e) {
       console.error('Błąd zapisu do Local Storage:', e);
     }
-
   }
+<<<<<<< HEAD
 
   readUserData(): UserPayload | null {
     const storedUserJson = localStorage.getItem(this.STORAGE_KEY);
@@ -44,3 +43,6 @@ export class UserService {
     }
   }
 }
+=======
+}
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865

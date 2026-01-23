@@ -6,10 +6,18 @@ import { UserPayload } from './interfaces/user-payload';
 import { UserService } from './services/user.service';
 import { NameComparator } from './name.comparator';
 import { ClrDatagrid, ClrDatagridSortOrder } from '@clr/angular';
+<<<<<<< HEAD
 import { Select, Store } from '@ngxs/store';
 import { AddUser, LoadUsers } from './user/user.action';
 import { UserState } from './user/user.state';
 import { Observable } from 'rxjs/internal/Observable';
+=======
+import { StoreUserService } from './services/store-user.service';
+
+import { STORAGE_KEY } from './storage-key';
+import { Store } from '@ngxs/store';
+import { AddUser } from './state/users/users.actions';
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865
 
 
 @Component({
@@ -27,17 +35,26 @@ export class AppComponent {
   minAge = 1;
   maxAge = 100;
 
+<<<<<<< HEAD
   // users: UserPayload[] = [];
 
   @Select(UserState.users) users$!: Observable<UserPayload[]>;
 
   private STORAGE_KEY = 'userData';
+=======
+  users: UserPayload[] = [];
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865
 
   nameComparator = new NameComparator();
   defaultSortOrder = ClrDatagridSortOrder.ASC;
 
+<<<<<<< HEAD
   constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private store: Store) { }
    
+=======
+  constructor(private fb: FormBuilder, private ageService: AgeService, private toast: ToastService, private userService: UserService, private storeUserService: StoreUserService, private store: Store) { }
+
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865
   ngOnInit(): void {
     this.userForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -47,10 +64,11 @@ export class AppComponent {
       age: ['', [Validators.required, Validators.min(0)]],
       termsAccepted: [false, [Validators.requiredTrue]]
     });
-
-
     this.age()?.valueChanges.subscribe(age => this.setAge(age));
+    
+    this.storeUserService.readUserData();
 
+<<<<<<< HEAD
     /*
     const data = localStorage.getItem(this.STORAGE_KEY);
     if (data) {
@@ -67,6 +85,8 @@ export class AppComponent {
     this.store.dispatch(new LoadUsers());
 
 
+=======
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865
   }
 
 
@@ -118,7 +138,13 @@ export class AppComponent {
 
         const user: UserPayload = this.userForm.value;
 
+<<<<<<< HEAD
         this.store.dispatch(new AddUser(user));
+=======
+        this.users.push(user);
+        // localStorage.setItem(STORAGE_KEY, JSON.stringify(this.users));
+        this.userService.saveUserData(user);
+>>>>>>> f345d5b4dff85130fdc46a1ced36ed6a24f8f865
         this.userForm.reset();
 
 
@@ -136,6 +162,10 @@ export class AppComponent {
       }
 
 
-    })
+    });
+
+    this.store.dispatch(new AddUser(user));
+
+
   }
 }
